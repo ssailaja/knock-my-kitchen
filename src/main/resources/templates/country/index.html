@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+    <body class="container">
+
+        <h1 th:text="${title}">Default Title</h1>
+
+        <nav th:replace="fragments :: navigation"></nav>
+
+        <ul id="horizontal-list">
+            <li th:each="country : ${countries}">
+                <a th:href="@{/recipe?id=} + ${country.id}">
+                    <label th:text="${country.name}"></label>
+                </a>
+            </li>
+        </ul>
+    </body>
+</html>

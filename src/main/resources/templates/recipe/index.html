@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${recipes} and ${recipes.size()}">No recipe found for this country :(</p>
+
+<ul>
+    <li th:each="recipe : ${recipes}">
+        <div th:if="${signedUser}">
+            <!-- TODO  -  Add hidden id tag only for signed in users -->
+            <input type="hidden" value="${recipe.id}" >
+            <!-- TODO  -  Add javascript function on onclick to intimate user that about to midify or remove option-->
+            <!-- TODO  -  Also show checkbox only for signed in users -->
+            <input type="checkbox" value="Modify or Remove" onclick="">
+        </div>
+        Name : <span th:text="${recipe.name}" th:remove="tag">name</span> <br/>
+        Description : <span th:text="${recipe.description}" th:remove="tag">description</span> <br/>
+        Created or Updated By : <span th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}" th:remove="tag">createdBy</span> <br/>
+        Created or Updated On : <span th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}" th:remove="tag">createdOn</span>
+    </li>
+</ul>
+<!-- TODO - Below div section would be displayed only on signed in users-->
+<div th:if="${signedUser}">
+    <a th:href="@{recipe/add}">Add</a> |
+    <a th:href="@{recipe/edit}">Edit</a>|
+    <a th:href="@{recipe/remove}">Remove</a>
+</div>
+</body>
+</html>
