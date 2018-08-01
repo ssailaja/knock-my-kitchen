@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/knockmykitchen.css}"/>
+
 </head>
 <body>
 <div class="content">
     <nav th:fragment="navigation">
         <a href="/country">Home</a> |
-        <a href="/search"><img src="../images/search_icon.png" width="20" height="20"></a>
         <a href="/user/signup">Sign Up</a> /
-        <a href="/user/signin">Sign in</a>
+        <div th:if="not ${signedUser}">
+            <a href="/user/signin">Log in</a>
+        </div>
+        <div th:if="${signedUser}">
+            <label onclick="logout()">Log Out</label>
+        </div>
     </nav>
 </div>
 <div th:fragment="footer">

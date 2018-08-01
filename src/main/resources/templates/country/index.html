@@ -7,13 +7,19 @@
         <h1 th:text="${title}">Default Title</h1>
 
         <nav th:replace="fragments :: navigation"></nav>
-
+        <h1>Recipe of the Week</h1>
+        <div>
+            <img src="../images/recipe.jpg">
+            <label>Low-calorie chicken dishes</label>
+        </div>
+        <h1>Food Around The World</h1>
         <ul id="horizontal-list">
-            <li th:each="country : ${countries}">
+            <li th:each="country : ${countries}" class="countryContainer">
                 <a th:href="@{/recipe?id=} + ${country.id}">
                     <label th:text="${country.name}"></label>
                 </a>
             </li>
         </ul>
+        <div th:replace="fragments :: footer"></div>
     </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -35,6 +36,7 @@ public class UserController {
             return "user/login";
         }
         // checking as existing user against DB value
+
         return "redirect:country";
     }
     @RequestMapping(value = "/signup")

@@ -10,33 +10,33 @@
     <div class="form-group">
         <label th:for="firstName">Firstname</label>
         <input class="form-control" th:field="*{firstName}" />
-        <span th:errors="*{firstName}" class="error"></span>
+        <span th:errors="*{firstName}" class="errorContainer"></span>
     </div>
     <div class="form-group">
         <label th:for="lastName">Lastname</label>
         <input class="form-control" th:field="*{lastName}" />
-        <span th:errors="*{lastName}" class="error"></span>
+        <span th:errors="*{lastName}" class="errorContainer"></span>
     </div>
     <div class="form-group">
         <label th:for="userName">Username</label>
         <input class="form-control" th:field="*{userName}" />
-        <span th:errors="*{userName}" class="error"></span>
+        <span th:errors="*{userName}" class="errorContainer"></span>
     </div>
     <div class="form-group">
         <label th:for="password">Password</label>
         <input class="form-control" th:field="*{password}" />
-        <span th:errors="*{password}" class="error"></span>
+        <span th:errors="*{password}" class="errorContainer"></span>
     </div>
 
     <div class="form-group">
         <label th:for="confirmPassword">ConfirmPassword</label>
         <input class="form-control" th:field="*{confirmPassword}" />
-        <span th:errors="*{confirmPassword}" class="error"></span>
+        <span th:errors="*{confirmPassword}" class="errorContainer"></span>
     </div>
     <div class="form-group">
         <label th:for="email">Email</label>
         <input class="form-control" th:field="*{email}" />
-        <span th:errors="*{email}" class="error"></span>
+        <span th:errors="*{email}" class="errorContainer"></span>
     </div>
 
 

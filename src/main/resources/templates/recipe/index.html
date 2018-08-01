@@ -28,8 +28,9 @@
 <!-- TODO - Below div section would be displayed only on signed in users-->
 <div th:if="${signedUser}">
     <a th:href="@{recipe/add}">Add</a> |
-    <a th:href="@{recipe/edit}">Edit</a>|
-    <a th:href="@{recipe/remove}">Remove</a>
+    <!-- a th:href="@{recipe/edit}">Edit</a>|
+    <a th:href="@{recipe/remove}">Remove</a -->
 </div>
+<div th:replace="fragments :: footer"></div>
 </body>
 </html>
