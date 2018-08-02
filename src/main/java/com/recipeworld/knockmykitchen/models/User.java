@@ -48,6 +48,8 @@ public class User {
     @JoinColumn(name = "country_id")
     private List<Country> countries = new ArrayList<>();
 
+    private int active;
+
     public User() {
     }
 
@@ -139,5 +141,13 @@ public class User {
 
     public void setCountries(List<Country> countries) {
         this.countries = countries;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 }

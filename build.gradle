@@ -1,6 +1,7 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = '2.0.0.RELEASE'
+		bootstrapVersion = '4.0.0'
 	}
 	repositories {
 		mavenCentral()
@@ -25,11 +26,21 @@ repositories {
 
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.webjars:jquery:3.3.1-1')
+	compile('org.webjars:jquery-ui:1.12.1')
+	compile("org.webjars:bootstrap:${bootstrapVersion}")
+	compile("org.webjars:bootswatch-lumen:${bootstrapVersion}")
+	compile('org.webjars:font-awesome:5.0.10')
 	compile('mysql:mysql-connector-java')
+	compile('org.webjars:webjars-locator:0.33')
+	// compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE')
 	runtime('org.springframework.boot:spring-boot-devtools')
+	compile('com.h2database:h2')
+	testCompile('org.springframework.security:spring-security-test')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

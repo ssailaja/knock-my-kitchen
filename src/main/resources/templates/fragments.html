@@ -4,21 +4,27 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">Knock My Kitchen</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/knockmykitchen.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script type="text/javascript" th:src="@{/javascript/script.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="content">
+<div class="card-layout">
     <nav th:fragment="navigation">
-        <a href="/country">Home</a> |
-        <a href="/user/signup">Sign Up</a> /
-        <div th:if="not ${signedUser}">
-            <a href="/user/signin">Log in</a>
-        </div>
-        <div th:if="${signedUser}">
-            <label onclick="logout()">Log Out</label>
+        <a href="/country">Home</a>
+        <div class="align">
+            <div>
+                <a href="/user/signup">Sign Up</a> /
+            </div>
+            <div th:if="not ${signedUser}">
+                <a href="/user/signin">Log in</a>
+            </div>
+            <div th:if="${signedUser}">
+                <label onclick="logout()">Log Out</label>
+            </div>
+
         </div>
     </nav>
 </div>
