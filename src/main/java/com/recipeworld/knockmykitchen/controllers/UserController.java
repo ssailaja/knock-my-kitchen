@@ -4,6 +4,10 @@ import com.recipeworld.knockmykitchen.models.Country;
 import com.recipeworld.knockmykitchen.models.Recipe;
 import com.recipeworld.knockmykitchen.models.User;
 import com.recipeworld.knockmykitchen.models.data.UserDao;
+import com.recipeworld.knockmykitchen.service.SecurityService;
+import com.recipeworld.knockmykitchen.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,34 +24,44 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
-    private HttpSession session;
+    private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
 
     @Autowired
     private UserDao userDao;
 
     @RequestMapping(value = "/signin")
-    public String signin(Model model) {
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
 
-        model.addAttribute(new User());
-        model.addAttribute("title", "Sign In");
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
 
         return "user/login";
     }
 
-    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(@ModelAttribute @Valid User newUser,
                          Errors errors,
                          Model model) {
-
-        if (errors.hasErrors()) {
+        LOGGER.info("Inside signin post method...........");
+        *//*if (errors.hasErrors()) {
             return "user/login";
-        }
+        }*//*
         // checking as existing user against DB value
         session.setAttribute("signedUser", true);
-        model.addAttribute("signedUser", session.getAttribute("signedUser"));
-        return "redirect:country";
-    }
+        // model.addAttribute("signedUser", session.getAttribute("signedUser"));
+        LOGGER.info("Inside signin post method........... Exits....");
+
+        return "redirect:/country";
+    }*/
+
     @RequestMapping(value = "/signup")
     public String signup(Model model) {
 
@@ -61,19 +75,15 @@ public class UserController {
     public String signup(@ModelAttribute @Valid User newUser,
                          Errors errors,
                          Model model) {
-        /*User userExists = userDao.findByName(newUser.getUserName());
-        if (userExists != null) {
-            errors.rejectValue("userName", "error.user",
-                            "There is already a user registered with the provided name");
-        }*/
-        if(!newUser.getPassword().equals(newUser.getConfirmPassword())) {
 
-            // errors.getAllErrors().add()
-            return "user/signup";
-        }
         if (errors.hasErrors()) {
-            return "user/signup";
+            LOGGER.info("Inside error on signup post method " + newUser.getUserName());
+            return "/user/signup";
         }
+
+        userService.save(newUser);
+
+        securityService.autologin(newUser.getUserName(), newUser.getPassword());
         // checking as existing user against DB value
         return "redirect:country";
     }

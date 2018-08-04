@@ -1,5 +1,7 @@
 package com.recipeworld.knockmykitchen.models;
 
+import com.recipeworld.knockmykitchen.annotation.PasswordMatches;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@PasswordMatches(message = "Passwords should be matched!")
 public class User {
 
     @Id
