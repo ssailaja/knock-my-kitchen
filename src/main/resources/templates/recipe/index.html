@@ -28,7 +28,7 @@
 </ul>
 </div>
 <!-- TODO - Below div section would be displayed only on signed in users-->
-<div sec:authorize="not isAuthenticated()" class="form-group">
+<div sec:authorize="isAuthenticated()" class="form-group">
 
         <a th:href="@{recipe/add}" class="btn btn-lg btn-primary btn-block">Add Recipe</a>
 
