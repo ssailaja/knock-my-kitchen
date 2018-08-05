@@ -1,35 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Knock My Kitchen</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <script type="text/javascript" th:src="@{/javascript/script.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="card-layout">
+
+<main class="container-fluid">
+
     <nav th:fragment="navigation">
-        <a href="/country">Home</a>
+
+        <br/>
+        <h1 class="w3-clear w3-center nextprev">Knock My Kitchen</h1>
+        <br/>
+        <div class="w3-clear w3-center nextprev">
+            <a class="w3-left w3-btn" th:href="@{/country}"><span class="w3-hide-small"> <b>Home </b></span></a>
+            <a class="w3-btn w3-center" th:href="@{/user/signup}"><span
+                    class="w3-hide-small"> <b> Sign Up </b></span></a>
+            <a class="w3-right w3-btn" th:href="@{/user/signin}" sec:authorize="not isAuthenticated()"><span
+                    class="w3-hide-small"> <b> Log In </b> </span></a>
+            <a class="w3-right w3-btn" th:href="@{/user/signin}" sec:authorize="isAuthenticated()"><span
+                    class="w3-hide-small"><b>   Log Out </b></span></a>
+        </div>
+        <br/>
+        <h1 th:text="${title}" class="w3-clear w3-center nextprev">Default Title</h1>
+        <!--<div style="align : left;">
+            <a href="/country">Home</a>
+        </div>
         <div class="align">
             <div>
                 <a href="/user/signup">Sign Up</a> /
             </div>
-            <div th:if="not ${signedUser}">
+            <div sec:authorize="not isAuthenticated()">
                 <a href="/user/signin">Log in</a>
             </div>
-            <div th:if="${signedUser}">
+            <div sec:authorize="isAuthenticated()">
                 <label onclick="logout()">Log Out</label>
             </div>
 
-        </div>
+        </div>-->
+        <br/><br/>
     </nav>
-</div>
+
+</main>
 <div th:fragment="footer">
-    &copy; 2018
+    &copy;
+    <span th:text="${#dates.year(#dates.createNow())}"></span>
+
+                | Logged user: <span sec:authentication="name"></span> |
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/signin?logout}">Sign Out</a>
+            </span>
+            <span sec:authorize="not isAuthenticated()">
+                <a th:href="@{/user/signin}">Sign In</a>
+            </span>
+
+    <script type="text/javascript"
+            src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </div>
 
 </body>

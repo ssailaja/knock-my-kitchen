@@ -92,3 +92,15 @@ input[type="password"] {
 	font-size: 12px;
 	color: #FF1C19;
 }
+
+.nextprev a.w3-right, .nextprev a.w3-left, .nextprev a.w3-center {
+    background-color:#0066ff;
+    color:#ffffff;
+    border-color:#4CAF50;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-left: 15px;
+    width: auto;
+    height: auto;
+}
+

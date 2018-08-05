@@ -43,7 +43,7 @@ public class CountryController {
         countries.add(country);
         // model.addAttribute("countries", countryDao.findAll());
         model.addAttribute("countries", countries)
-                .addAttribute("title", "Knock My Kitchen");
+                .addAttribute("title", "Recipe of the Week");
 
         return "country/index";
     }

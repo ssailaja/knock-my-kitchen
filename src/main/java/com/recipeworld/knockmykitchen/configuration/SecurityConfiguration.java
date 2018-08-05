@@ -25,8 +25,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc
-@ComponentScan
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -38,37 +36,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers( "/user/signup", "/country").permitAll().
-                anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/user/signin")
-                .usernameParameter("userName")
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/user/signin?logout")
-                .and()
-                .rememberMe();
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                // ignore all URLs that start with /resources/ or /static/
-                .antMatchers("/resources**", "/static**");
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder builder)
-            throws Exception {
-        builder.userDetailsService(new UserDetailsServiceImpl());
-    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -91,23 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/user/signin");
-        /*http.authorizeRequests()
-                .regexMatchers("/register").permitAll()
-                .regexMatchers("/webjars/.*").permitAll()
-                .regexMatchers("/css/.*").permitAll()
-                .regexMatchers("/user/signin?[^/]*").permitAll()
-                .antMatchers("/user/signup", "/country", "/recipe").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/user/signin")
-                .usernameParameter("username")
-                .defaultSuccessUrl("/country", true)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/user/signin?logout");*/
+
     }
 
     @Autowired
@@ -142,11 +93,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new UserDetailsServiceImpl();
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**");
-    }
 }
 

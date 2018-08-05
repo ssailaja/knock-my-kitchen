@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <div style="max-width:400px;">
 
-<p th:unless="${recipes} and ${recipes.size()}">No recipe found for this country :(</p>
+    <p th:unless="${recipes} and ${recipes.size()}">No recipe found for this country :(</p>
 
-<div class="form-group">
-<ul>
-    <li th:each="recipe : ${recipes}">
-        <div sec:authorize="not isAuthenticated()">
-                Name : <span th:text="${recipe.name}">name</span> <br/>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-            Name : <a th:href="@{recipe/modify/${recipe.id}}"><span th:text="${recipe.name}">name</span></a><br/>
-        </div>
-        Description : <span th:text="${recipe.description}">description</span> <br/>
-        Created or Updated By : <span th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}" >createdBy</span> <br/>
-        Created or Updated On : <span th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}" >createdOn</span>
-    </li>
-</ul>
-</div>
-<!-- TODO - Below div section would be displayed only on signed in users-->
-<div sec:authorize="isAuthenticated()" class="form-group">
+    <div class="form-group">
+        <ul>
+            <li th:each="recipe : ${recipes}">
+                <div sec:authorize="not isAuthenticated()">
+                    Name : <span th:text="${recipe.name}">name</span> <br/>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    Name : <a th:href="@{recipe/modify/${recipe.id}}"><span
+                        th:text="${recipe.name}">name</span></a><br/>
+                </div>
+                Description : <span th:text="${recipe.description}">description</span> <br/>
+                Created or Updated By : <span
+                    th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}">createdBy</span> <br/>
+                Created or Updated On : <span
+                    th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}">createdOn</span>
+            </li>
+        </ul>
+    </div>
+    <!-- TODO - Below div section would be displayed only on signed in users-->
+    <div sec:authorize="isAuthenticated()" class="form-group">
 
         <a th:href="@{recipe/add}" class="btn btn-lg btn-primary btn-block">Add Recipe</a>
 
-</div>
+    </div>
 </div>
 <div th:replace="fragments :: footer"></div>
 </body>
