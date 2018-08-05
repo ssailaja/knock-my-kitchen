@@ -1,4 +1,4 @@
-package com.recipeworld.knockmykitchen.service;
+package com.recipeworld.knockmykitchen.service.impl;
 
 import com.recipeworld.knockmykitchen.models.User;
 import org.slf4j.Logger;
