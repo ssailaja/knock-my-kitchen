@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+<div class="form-group">
+
+
+
+        <label for="nameLbl">Name :</label> <span th:text="${recipe.name}" id="nameLbl">name</span> <br/>
+
+    <label for="desc">Description :  </label>
+    <span th:text="${recipe.description}" id="desc">description</span> <br/>
+    <label for="createdBy">Created or Updated By : </label>
+    <span
+            th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}" id="createdBy">createdBy</span> <br/>
+    <label for="createdOn">Created or Updated On : </label> <span
+        th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}" id="createdOn">createdOn</span>
+
+
+</div>
+
+
+<a class="w3-left w3-btn" th:href="@{/remove?recipeId} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>remove </b></span></a>
+<a class="w3-left w3-btn" th:href="@{/Modify?recipeId} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>edit </b></span></a>
+
+
+</body>
+</html>
