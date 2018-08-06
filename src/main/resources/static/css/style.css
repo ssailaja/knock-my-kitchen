@@ -1,30 +1,4 @@
-ul {
-    list-style-type: none;
-    margin: 10;
-    padding: 10;
-    overflow: hidden;
-    background-color: white;
-
-}
-
-li {
-    float: left;
-    margin: 10;
-    padding: 10;
-}
-
-li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: red;
-}
-
+h2 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
 .content {
     max-width: 500px;
     margin: auto;
@@ -94,7 +68,7 @@ input[type="password"] {
 }
 
 .nextprev a.w3-right, .nextprev a.w3-left, .nextprev a.w3-center {
-    background-color:#0066ff;
+    background-color:#336699;
     color:#ffffff;
     border-color:#4CAF50;
     border-radius: 10px;
@@ -104,3 +78,12 @@ input[type="password"] {
     height: auto;
 }
 
+#dialog {
+    display:none;
+}
+
+.myTarget {
+    font-weight:bold;
+    font-style:italic;
+    color:red;
+}

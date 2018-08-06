@@ -15,17 +15,19 @@
         <ul>
             <li th:each="recipe : ${recipes}">
                 <div sec:authorize="not isAuthenticated()">
-                    Name : <span th:text="${recipe.name}">name</span> <br/>
+                    <label for="nameLbl">Name :</label> <span th:text="${recipe.name}" id="nameLbl">name</span> <br/>
                 </div>
                 <div sec:authorize="isAuthenticated()">
-                    Name : <a th:href="@{recipe/modify/${recipe.id}}"><span
+                    <label for="name">Name :</label> <a th:href="@{recipe/modify/${recipe.id}}" id="name"><span
                         th:text="${recipe.name}">name</span></a><br/>
                 </div>
-                Description : <span th:text="${recipe.description}">description</span> <br/>
-                Created or Updated By : <span
-                    th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}">createdBy</span> <br/>
-                Created or Updated On : <span
-                    th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}">createdOn</span>
+                <label for="desc">Description :  </label>
+                <span th:text="${recipe.description}" id="desc">description</span> <br/>
+                <label for="createdBy">Created or Updated By : </label>
+                <span
+                    th:text="${null != recipe.createdBy ? recipe.createdBy : recipe.updatedBy}" id="createdBy">createdBy</span> <br/>
+                <label for="createdOn">Created or Updated On : </label> <span
+                    th:text="${null != recipe.createdOn ? recipe.createdOn : recipe.updatedOn}" id="createdOn">createdOn</span>
             </li>
         </ul>
     </div>

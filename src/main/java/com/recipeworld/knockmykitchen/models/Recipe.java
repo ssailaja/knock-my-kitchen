@@ -3,10 +3,15 @@ package com.recipeworld.knockmykitchen.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Recipe {
+
+    private static final String FORMAT = "MM/dd/yyyy";
 
     @Id
     @GeneratedValue
@@ -39,13 +44,13 @@ public class Recipe {
     @ManyToOne
     private Country country;
 
-    public Recipe(String name, String description, String createdBy, String createdOn, String updatedBy, String updatedOn) {
+    public Recipe(String name, String description, String createdBy, Date createdOn, String updatedBy, Date updatedOn) {
         this.name = name;
         this.description = description;
         this.createdBy = createdBy;
-        this.createdOn = createdOn;
+        this.createdOn = dateConversion(createdOn);
         this.updatedBy = updatedBy;
-        this.updatedOn = updatedOn;
+        this.updatedOn = dateConversion(updatedOn);
     }
 
     public Recipe() { }
@@ -122,5 +127,10 @@ public class Recipe {
                 ", updatedOn='" + updatedOn + '\'' +
                 ", country=" + country +
                 '}';
+    }
+
+    private String dateConversion(Date date) {
+        DateFormat format = new SimpleDateFormat(FORMAT);
+        return null != date ? format.format(date) : null;
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -86,6 +87,14 @@ public class UserController {
 
         securityService.autologin(newUser.getUserName(), newUser.getPassword());
         // checking as existing user against DB value
+        return "redirect:country";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(Principal user) {
+        LOGGER.info("The user to be unauthenticated.......{}", user.getName());
+        userService.removeUser(user.getName());
+
         return "redirect:country";
     }
 }

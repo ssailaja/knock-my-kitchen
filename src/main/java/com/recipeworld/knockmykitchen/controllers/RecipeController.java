@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,7 +32,7 @@ public class RecipeController {
         System.out.println("Country ID " + countryId);
         model.addAttribute("title", "Recipes");
         List<Recipe> recipes = new ArrayList<>();
-        Recipe recipe = new Recipe("Panneer Butter Masal", "Description", "Sailaja", "07/28/2018", null, null);
+        Recipe recipe = new Recipe("Panneer Butter Masal", "Description", "Sailaja", new Date(), null, null);
         recipes.add(recipe);
         model.addAttribute("recipes", recipes);
         // model.addAttribute("recipes", recipeDao.findAllById(countryId));
@@ -74,8 +72,15 @@ public class RecipeController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveRecipeForm(Model model) {
+    @RequestMapping(value = "modify", method = RequestMethod.GET)
+    public String displayReviewRecipeForm(Model model, @PathVariable Integer recipeId) {
+        model.addAttribute("recipe", recipeDao.findById(recipeId));
+        model.addAttribute("title", "Review Recipe");
+        return "recipe/review";
+    }
+
+    @RequestMapping(value = "modify", method = RequestMethod.POST)
+    public String displayModifyRecipeForm(Model model) {
         model.addAttribute("recipes", recipeDao.findAll());
         model.addAttribute("title", "Remove Recipe");
         return "recipe/remove";

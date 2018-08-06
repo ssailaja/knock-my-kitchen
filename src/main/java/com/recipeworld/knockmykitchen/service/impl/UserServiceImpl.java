@@ -39,4 +39,10 @@ public class UserServiceImpl implements UserService {
         UserDetails details = userDetailsService.loadUserByUsername(username);
         return new User(details.getUsername(), details.getPassword());
     }
+
+    @Override
+    public void removeUser(String username) {
+        // return /*userDao.findByUsername(username);*/
+        UserDetailsServiceImpl.users.remove(username);
+    }
 }

@@ -5,13 +5,14 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">Knock My Kitchen</title>
 
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <script type="text/javascript" th:src="@{/javascript/script.js}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../javascript/script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
 
@@ -28,27 +29,15 @@
                     class="w3-hide-small"> <b> Sign Up </b></span></a>
             <a class="w3-right w3-btn" th:href="@{/user/signin}" sec:authorize="not isAuthenticated()"><span
                     class="w3-hide-small"> <b> Log In </b> </span></a>
-            <a class="w3-right w3-btn" th:href="@{/user/signin}" sec:authorize="isAuthenticated()"><span
+            <a class="w3-right w3-btn" th:href="@{/user/logout}" sec:authorize="isAuthenticated()"><span
                     class="w3-hide-small"><b>   Log Out </b></span></a>
         </div>
         <br/>
-        <h1 th:text="${title}" class="w3-clear w3-center nextprev">Default Title</h1>
-        <!--<div style="align : left;">
-            <a href="/country">Home</a>
-        </div>
-        <div class="align">
-            <div>
-                <a href="/user/signup">Sign Up</a> /
-            </div>
-            <div sec:authorize="not isAuthenticated()">
-                <a href="/user/signin">Log in</a>
-            </div>
-            <div sec:authorize="isAuthenticated()">
-                <label onclick="logout()">Log Out</label>
-            </div>
 
-        </div>-->
-        <br/><br/>
+        <h2 th:text="${title}" class="w3-clear w3-center nextprev">Default Title</h2>
+
+        <br/>
+
     </nav>
 
 </main>
@@ -58,14 +47,13 @@
 
                 | Logged user: <span sec:authentication="name"></span> |
             <span sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/signin?logout}">Sign Out</a>
+                <a th:href="@{/user/logout}">Sign Out</a>
             </span>
             <span sec:authorize="not isAuthenticated()">
                 <a th:href="@{/user/signin}">Sign In</a>
             </span>
 
-    <script type="text/javascript"
-            src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </div>
 
 </body>
