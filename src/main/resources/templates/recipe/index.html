@@ -18,7 +18,7 @@
                     <label for="nameLbl">Name :</label> <span th:text="${recipe.name}" id="nameLbl">name</span> <br/>
                 </div>
                 <div sec:authorize="isAuthenticated()">
-                    <label for="name">Name :</label> <a th:href="@{recipe/modify/${recipe.id}}" id="name"><span
+                    <label for="name">Name :</label> <a th:href="@{/recipe/modify/} + ${recipe.id}" id="name"><span
                         th:text="${recipe.name}">name</span></a><br/>
                 </div>
                 <label for="desc">Description :  </label>

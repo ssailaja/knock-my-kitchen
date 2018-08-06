@@ -72,9 +72,12 @@ public class RecipeController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "modify", method = RequestMethod.GET)
-    public String displayReviewRecipeForm(Model model, @PathVariable Integer recipeId) {
-        model.addAttribute("recipe", recipeDao.findById(recipeId));
+    @RequestMapping(value = "/modify/{recipeId}", method = RequestMethod.GET)
+    public String displayReviewRecipeForm(Model model, @PathVariable String recipeId) {
+        Recipe recipe = new Recipe("Panneer Butter Masal", "Description", "Sailaja", new Date(), null, null);
+
+        //model.addAttribute("recipe", recipeDao.findById(recipeId));
+        model.addAttribute("recipe", recipe);
         model.addAttribute("title", "Review Recipe");
         return "recipe/review";
     }
