@@ -15,7 +15,7 @@
 <h1>Food Around The World</h1>
 <ul id="horizontal-list">
     <li th:each="country : ${countries}" class="countryContainer">
-        <a th:href="@{/recipe?id=} + ${country.id}">
+        <a th:href="@{/recipe/} + ${country.id}">
             <label th:text="${country.name}"></label>
         </a>
     </li>

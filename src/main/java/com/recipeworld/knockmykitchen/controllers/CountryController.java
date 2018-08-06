@@ -3,6 +3,7 @@ package com.recipeworld.knockmykitchen.controllers;
 import com.recipeworld.knockmykitchen.models.Country;
 import com.recipeworld.knockmykitchen.models.Recipe;
 import com.recipeworld.knockmykitchen.models.data.CountryDao;
+import com.recipeworld.knockmykitchen.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,26 +24,13 @@ import java.util.List;
 @Controller
 @RequestMapping("country")
 public class CountryController {
+
     @Autowired
-    private CountryDao countryDao;
+    private CountryService countryService;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        List<Country> countries = new ArrayList<>();
-        Country country = new Country("India");
-        country.setId(1);
-        countries.add(country);
-        country = new Country("America");
-        country.setId(2);
-        countries.add(country);
-        country = new Country("Mexico");
-        country.setId(3);
-        countries.add(country);
-        country = new Country("Australia");
-        country.setId(4);
-        countries.add(country);
-        // model.addAttribute("countries", countryDao.findAll());
-        model.addAttribute("countries", countries)
+        model.addAttribute("countries", countryService.findAll())
                 .addAttribute("title", "Recipe of the Week");
 
         return "country/index";
