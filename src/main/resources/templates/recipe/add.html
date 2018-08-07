@@ -5,7 +5,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px;" th:object="${recipe}">
+<form method="POST" style="max-width:600px;" th:object="${recipe}" th:action="@{/recipe/add}">
+    <input type="hidden" name="countryId" th:value="${recipe.country.id}"/>
     <div class="form-group">
         <label th:for="type">Country : </label>
         <span th:text="${recipe.country.name}"/>
@@ -20,7 +21,10 @@
         <textarea class="form-control" th:field="*{description}" />
         <span th:errors="*{description}" class="error"></span>
     </div>
-    <input type="submit" value="Add Recipe" />
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="${title}"> Add Recipe</button>
+    </div>
+
 </form>
 
 </body>

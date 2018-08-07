@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,19 +54,26 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddRecipeForm(
+    public String processAddRecipeForm(Principal user, @RequestParam String countryId,
             @ModelAttribute @Valid Recipe newRecipe,
             Errors errors,
             Model model) {
+        LOGGER.info("Country ID in recipe add POST method...........{}", countryId);
+        LOGGER.info("Principal User in recipe add POST method...........{}", user.getName());
         if (errors.hasErrors()) {
             LOGGER.info("Inside recipe add post method in errors condition..... " + newRecipe.toString());
 
             model.addAttribute("recipe", newRecipe);
             return "recipe/add";
         }
+
         newRecipe.setId(RecipeServiceImpl.id++);
+        newRecipe.setCreatedBy(user.getName());
+        newRecipe.setCreatedOn(newRecipe.dateConversion(new Date()));
+        newRecipe.setCountry(countryService.findById(Integer.valueOf(countryId)));
+        LOGGER.info("Inside add POST method ........... {}", newRecipe.toString());
         recipeService.addRecipe(newRecipe);
-        return "redirect:";
+        return "redirect:/country";
     }
 
     @RequestMapping(value = "/review/{recipeId}")
@@ -77,18 +85,16 @@ public class RecipeController {
 
     @RequestMapping(value = "/modify/{recipeId}")
     public String displayModifyRecipeForm(Model model, @PathVariable String recipeId) {
-        Recipe recipe = recipeService.findById(Integer.valueOf(recipeId));
-        model.addAttribute("recipe", recipe);
+        model.addAttribute("recipe", recipeService.findById(Integer.valueOf(recipeId)));
         model.addAttribute("title", "Modify Recipe");
-        return "redirect:/recipe/add?countryId=" + recipe.getCountry().getId();
+        return "recipe/add";
     }
 
-    @RequestMapping(value = "/remove")
-    public String processRemoveRecipeForm(@RequestParam Integer recipeId) {
-        Recipe recipe = recipeService.findById(recipeId);
-        Integer id = recipe.getCountry().getId();
-        recipeService.removeRecipe(recipe);
-        return "recipe/" + id;
+    @RequestMapping(value = "/remove/{recipeId}")
+    public String processRemoveRecipeForm(@PathVariable Integer recipeId, @RequestParam String countryId ) {
+        LOGGER.info("Inside remove handler............{}", recipeId);
+        recipeService.removeRecipe(recipeService.findById(recipeId));
+        return "recipe/" + countryId;
     }
 
 

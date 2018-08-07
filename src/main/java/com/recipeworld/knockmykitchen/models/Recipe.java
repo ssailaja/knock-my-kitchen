@@ -25,20 +25,12 @@ public class Recipe {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    @NotNull
-    @Size(min=1, message = "Created By Field must not be empty")
     private String createdBy;
 
-    @NotNull
-    @Size(min=1, message = "Created On Field must not be empty")
     private String createdOn;
 
-    @NotNull
-    @Size(min=1, message = "updated By Field must not be empty")
     private String updatedBy;
 
-    @NotNull
-    @Size(min=1, message = "updated On Field must not be empty")
     private String updatedOn;
 
     @ManyToOne
@@ -133,7 +125,7 @@ public class Recipe {
                 '}';
     }
 
-    private String dateConversion(Date date) {
+    public String dateConversion(Date date) {
         DateFormat format = new SimpleDateFormat(FORMAT);
         return null != date ? format.format(date) : null;
     }

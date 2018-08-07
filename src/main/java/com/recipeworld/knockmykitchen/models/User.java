@@ -153,4 +153,21 @@ public class User {
     public void setActive(int active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", email='" + email + '\'' +
+                ", recipes=" + recipes +
+                ", countries=" + countries +
+                ", active=" + active +
+                '}';
+    }
 }
