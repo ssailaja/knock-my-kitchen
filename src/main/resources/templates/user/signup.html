@@ -11,36 +11,37 @@
         <form method="POST" style="max-width:600px;" th:object="${user}" th:action="@{/user/signup}" class="form-signin"  >
             <div class="form-group">
                 <div class="form-group">
+                    <p data-th-each="err : ${#fields.allErrors()}" data-th-text="${err}" class="errorContainer">
+                        Invalid input.
+                    </p>
+                </div>
+                <div class="form-group">
                     <input class="form-control" th:field="*{firstName}" placeholder="First Name" autofocus="true"/>
-                    <span th:errors="*{firstName}" class="errorContainer"></span>
+                    <!--<span th:errors="*{firstName}" class="errorContainer"></span>-->
                 </div>
                 <div class="form-group">
                     <input class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
-                    <span th:errors="*{lastName}" class="errorContainer"></span>
+                   <!-- <span th:errors="*{lastName}" class="errorContainer"></span>-->
                 </div>
                 <div class="form-group">
                     <input class="form-control" th:field="*{userName}" placeholder="User Name"/>
-                    <span th:errors="*{userName}" class="errorContainer"></span>
+                    <!--<span th:errors="*{userName}" class="errorContainer"></span>-->
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" th:field="*{password}" placeholder="Password"/>
-                    <span th:errors="*{password}" class="errorContainer"></span>
+                    <!--<span th:errors="*{password}" class="errorContainer"></span>-->
                 </div>
 
                 <div class="form-group">
                     <input type="password" class="form-control" th:field="*{confirmPassword}"
                            placeholder="Confirm Password"/>
-                    <span th:errors="*{confirmPassword}" class="errorContainer"></span>
+                    <!--<span th:errors="*{confirmPassword}" class="errorContainer"></span>-->
                 </div>
                 <div class="form-group">
                     <input class="form-control" th:field="*{email}" placeholder="Email"/>
-                    <span th:errors="*{email}" class="errorContainer"></span>
+                    <!--<span th:errors="*{email}" class="errorContainer"></span>-->
                 </div>
-                <div class="form-group">
-                    <p data-th-each="err : ${#fields.allErrors()}" data-th-text="${err}" class="error">
-                        Invalid input.
-                    </p>
-                </div>
+
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit</button>
                 </div>

@@ -58,11 +58,7 @@ public class RecipeController {
             @ModelAttribute @Valid Recipe newRecipe,
             Errors errors,
             Model model) {
-        LOGGER.info("Country ID in recipe add POST method...........{}", countryId);
-        LOGGER.info("Principal User in recipe add POST method...........{}", user.getName());
         if (errors.hasErrors()) {
-            LOGGER.info("Inside recipe add post method in errors condition..... " + newRecipe.toString());
-
             model.addAttribute("recipe", newRecipe);
             return "recipe/add";
         }
@@ -97,6 +93,4 @@ public class RecipeController {
         recipeService.removeRecipe(recipe);
         return "redirect:/country";
     }
-
-
 }
