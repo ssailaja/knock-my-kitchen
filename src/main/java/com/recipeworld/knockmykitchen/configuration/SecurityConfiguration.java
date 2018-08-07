@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         };
 
         http.authorizeRequests().antMatchers(resources).permitAll();
-        http.authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().antMatchers("/user/signup", "/country", "/recipe").permitAll()
+        http.authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().antMatchers("/user/signup", "/country", "/recipe/*").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

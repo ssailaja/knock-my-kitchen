@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +36,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        // return /*userDao.findByUsername(username);*/
         UserDetails details = userDetailsService.loadUserByUsername(username);
+        // return getUser(username);
         return new User(details.getUsername(), details.getPassword());
     }
 
     @Override
     public void removeUser(String username) {
-        // return /*userDao.findByUsername(username);*/
+        // UserDetails details = getUserDetails(username);
+        // userDao.delete(getUser(username));
         UserDetailsServiceImpl.users.remove(username);
+    }
+
+    private User getUser(String username) {
+        return userDao.findByUserName(username);
     }
 }

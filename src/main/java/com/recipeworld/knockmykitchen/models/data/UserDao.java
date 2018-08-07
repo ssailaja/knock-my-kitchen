@@ -9,5 +9,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface UserDao extends CrudRepository<User, Long> {
-     // User findByName(String userName);
+     public User findByUserName(String userName);
 }

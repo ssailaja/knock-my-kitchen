@@ -7,21 +7,16 @@
 
 <form method="post" style="max-width:600px;" th:object="${recipe}">
     <div class="form-group">
-        <label th:for="type">Country</label>
-        <select th:object="${recipe}" th:field="*{country}" name="countryId" class="form-control">
-            <option th:each="country : ${countries}"
-                    th:text="${country.name}"
-                    th:value="${country.id}"
-                    th:selected="${'${recipe.country.}' + country.id}"></option>
-        </select>
+        <label th:for="type">Country : </label>
+        <span th:text="${recipe.country.name}"/>
     </div>
     <div class="form-group">
-        <label th:for="name">Name</label>
+        <label th:for="name">Name : </label>
         <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
-        <label th:for="description">Description</label>
+        <label th:for="description">Description : </label>
         <textarea class="form-control" th:field="*{description}" />
         <span th:errors="*{description}" class="error"></span>
     </div>

@@ -20,4 +20,6 @@ public interface RecipeService {
    boolean modifyRecipe(Recipe recipe);
 
    List<Recipe> findAll();
+
+   List<Recipe> findAllByCountryId(Integer countryId);
 }

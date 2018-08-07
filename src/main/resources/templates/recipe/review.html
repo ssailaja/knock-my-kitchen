@@ -13,7 +13,7 @@
 
 
 
-        <label for="nameLbl">Name :</label> <span th:text="${recipe.name}" id="nameLbl">name</span> <br/>
+    <label for="nameLbl">Name :</label> <span th:text="${recipe.name}" id="nameLbl">name</span> <br/>
 
     <label for="desc">Description :  </label>
     <span th:text="${recipe.description}" id="desc">description</span> <br/>
@@ -27,8 +27,8 @@
 </div>
 
 
-<a class="w3-left w3-btn" th:href="@{/remove?recipeId} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>remove </b></span></a>
-<a class="w3-left w3-btn" th:href="@{/Modify?recipeId} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>edit </b></span></a>
+<a class="w3-left w3-btn" th:href="@{/recipe/remove/} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>Remove </b></span></a>
+<a class="w3-left w3-btn" th:href="@{/recipe/modify/} + ${recipe.id}"><span class="w3-hide-small" onclick=""> <b>Edit </b></span></a>
 
 
 </body>

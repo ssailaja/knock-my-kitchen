@@ -6,6 +6,7 @@ import com.recipeworld.knockmykitchen.models.data.CountryDao;
 import com.recipeworld.knockmykitchen.models.data.RecipeDao;
 import com.recipeworld.knockmykitchen.service.CountryService;
 import com.recipeworld.knockmykitchen.service.RecipeService;
+import com.recipeworld.knockmykitchen.service.impl.RecipeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class RecipeController {
         LOGGER.info("Country ID " + countryId);
         model.addAttribute("title", "Recipes");
         model.addAttribute("countryId", countryId);
-        model.addAttribute("recipes", recipeService.findAll());
+        model.addAttribute("recipes", recipeService.findAllByCountryId(countryId));
         return "recipe/index";
     }
 
-    @RequestMapping(value = "/add/{countryId}")
-    public String displayAddRecipeForm(Model model, @PathVariable Integer countryId) {
+    @RequestMapping(value = "/add")
+    public String displayAddRecipeForm(Model model, @RequestParam Integer countryId) {
         model.addAttribute("title", "Add Recipe");
         Recipe recipe = new Recipe();
         recipe.setCountry(countryService.findById(countryId));
@@ -62,30 +63,32 @@ public class RecipeController {
             model.addAttribute("recipe", newRecipe);
             return "recipe/add";
         }
-        Country country = countryService.findById(newRecipe.getCountry().getId());
-        newRecipe.setCountry(country);
+        newRecipe.setId(RecipeServiceImpl.id++);
         recipeService.addRecipe(newRecipe);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/modify/{recipeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/review/{recipeId}")
     public String displayReviewRecipeForm(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeService.findById(recipeId));
         model.addAttribute("title", "Review Recipe");
         return "recipe/review";
     }
 
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String displayModifyRecipeForm(Model model) {
-        model.addAttribute("recipes", recipeService.findAll());
-        model.addAttribute("title", "Remove Recipe");
-        return "recipe/remove";
+    @RequestMapping(value = "/modify/{recipeId}")
+    public String displayModifyRecipeForm(Model model, @PathVariable String recipeId) {
+        Recipe recipe = recipeService.findById(Integer.valueOf(recipeId));
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("title", "Modify Recipe");
+        return "redirect:/recipe/add?countryId=" + recipe.getCountry().getId();
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove")
     public String processRemoveRecipeForm(@RequestParam Integer recipeId) {
-        recipeService.removeRecipe(recipeService.findById(recipeId));
-        return "redirect:";
+        Recipe recipe = recipeService.findById(recipeId);
+        Integer id = recipe.getCountry().getId();
+        recipeService.removeRecipe(recipe);
+        return "recipe/" + id;
     }
 
 

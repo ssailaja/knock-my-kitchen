@@ -11,7 +11,7 @@
         <form method="POST" style="max-width:600px;" th:object="${user}" th:action="@{/user/signup}" class="form-signin"  >
             <div class="form-group">
                 <div class="form-group">
-                    <input class="form-control" th:field="*{firstName}" placeholder="First Name"/>
+                    <input class="form-control" th:field="*{firstName}" placeholder="First Name" autofocus="true"/>
                     <span th:errors="*{firstName}" class="errorContainer"></span>
                 </div>
                 <div class="form-group">

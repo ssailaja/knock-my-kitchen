@@ -17,18 +17,20 @@ public class CountryServiceImpl implements CountryService {
 
     public static List<Country> countries = new ArrayList<>();
 
+    public static Integer id = 0;
+
     static {
         Country country = new Country("India");
-        country.setId(0);
+        country.setId(id++);
         countries.add(country);
         country = new Country("America");
-        country.setId(1);
+        country.setId(id++);
         countries.add(country);
         country = new Country("Mexico");
-        country.setId(2);
+        country.setId(id++);
         countries.add(country);
         country = new Country("Australia");
-        country.setId(3);
+        country.setId(id++);
         countries.add(country);
     }
 
@@ -39,6 +41,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country findById(Integer countryId) {
-        return countries.get(countryId);
+        return countries.stream().filter(cn -> countryId.equals(cn.getId())).findAny().get();
     }
 }
