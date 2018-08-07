@@ -91,10 +91,11 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/remove/{recipeId}")
-    public String processRemoveRecipeForm(@PathVariable Integer recipeId, @RequestParam String countryId ) {
+    public String processRemoveRecipeForm(@PathVariable Integer recipeId) {
         LOGGER.info("Inside remove handler............{}", recipeId);
-        recipeService.removeRecipe(recipeService.findById(recipeId));
-        return "recipe/" + countryId;
+        Recipe recipe = recipeService.findById(recipeId);
+        recipeService.removeRecipe(recipe);
+        return "redirect:/country";
     }
 
 
