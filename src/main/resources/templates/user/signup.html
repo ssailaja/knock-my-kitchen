@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
@@ -7,7 +7,7 @@
 
 <main class="container-fluid">
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" sec:authorize="not isAuthenticated()">
         <form method="POST" style="max-width:600px;" th:object="${user}" th:action="@{/user/signup}" class="form-signin"  >
             <div class="form-group">
                 <div class="form-group">
@@ -47,6 +47,13 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="row justify-content-center" sec:authorize="not isAuthenticated()">
+        <div class="form-group">
+            <p >
+                Session exists already, Please
+            </p>
+        </div>
     </div>
 </main>
 
