@@ -29,23 +29,23 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // user.setRoles(new HashSet<>(roleRepository.findAll()));
-        UserDetailsServiceImpl.users.add(user);
-        LOGGER.info("The saved user info.............{}", UserDetailsServiceImpl.users);
-        // userDao.save(user);
+        // UserDetailsServiceImpl.users.add(user);
+        // LOGGER.info("The saved user info.............{}", UserDetailsServiceImpl.users);
+        userDao.save(user);
     }
 
     @Override
     public User findByUsername(String username) {
         UserDetails details = userDetailsService.loadUserByUsername(username);
-        // return getUser(username);
-        return new User(details.getUsername(), details.getPassword());
+        return getUser(username);
+        // return new User(details.getUsername(), details.getPassword());
     }
 
     @Override
     public void removeUser(String username) {
         // UserDetails details = getUserDetails(username);
-        // userDao.delete(getUser(username));
-        UserDetailsServiceImpl.users.remove(username);
+        userDao.delete(getUser(username));
+        // UserDetailsServiceImpl.users.remove(username);
     }
 
     private User getUser(String username) {

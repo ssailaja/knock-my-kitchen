@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@PasswordMatches(message = "Passwords should be matched!")
+// @PasswordMatches(message = "Passwords should be matched!")
 public class User {
 
     @Id

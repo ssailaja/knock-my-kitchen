@@ -1,0 +1,20 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head"></head>
+<body class="container" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <main class="container-fluid">
+
+        <div class="row justify-content-center panel-body">
+
+            <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
+            <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+            <a th:href="@{/country}">Back to Home Page</a>
+        </div>
+    </main>
+    <div th:replace="fragments :: footer"></div>
+</body>
+</html>

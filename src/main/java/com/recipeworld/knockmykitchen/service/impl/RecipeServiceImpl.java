@@ -47,36 +47,43 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void addRecipe(Recipe recipe) {
-        // recipeDao.save(recipe);
-        recipes.add(recipe);
+        recipeDao.save(recipe);
+        // recipes.add(recipe);
     }
 
     @Override
     public Recipe findById(Integer recipreId) {
-        // return recipeDao.findById(recipreId);
-        return recipes.stream().filter(re -> recipreId.equals(re.getId())).findAny().get();
+        return recipeDao.findById(recipreId).get();
+        // return recipes.stream().filter(re -> recipreId.equals(re.getId())).findAny().get();
     }
 
     @Override
     public boolean removeRecipe(Recipe recipe) {
-        // recipeDao.delete(recipe);
-        return recipes.remove(recipe);
+        recipeDao.delete(recipe);
+        // return recipes.remove(recipe);
+        return true;
     }
 
     @Override
     public boolean modifyRecipe(Recipe recipe) {
-        // recipeDao.save(recipe);
-        return recipes.add(recipe);
+        recipeDao.save(recipe);
+        // return recipes.add(recipe);
+        return true;
     }
 
     @Override
     public List<Recipe> findAll() {
-        return recipes;
+        // return recipes;
+        List<Recipe> target = new ArrayList<>();
+        recipeDao.findAll().forEach(target::add);
+        return target;
     }
 
     @Override
     public List<Recipe> findAllByCountryId(Integer countryId) {
-        return recipes.stream().filter(re -> countryId.equals(re.getCountry().getId()))
-                .collect(Collectors.toList());
+        /*return recipes.stream().filter(re -> countryId.equals(re.getCountry().getId()))
+                .collect(Collectors.toList());*/
+
+        return recipeDao.findRecipesByCountryId(countryId);
     }
 }
