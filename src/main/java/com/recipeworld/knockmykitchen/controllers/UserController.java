@@ -48,22 +48,6 @@ public class UserController {
         return "user/login";
     }
 
-    /*@RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public String signin(@ModelAttribute @Valid User newUser,
-                         Errors errors,
-                         Model model) {
-        LOGGER.info("Inside signin post method...........");
-        *//*if (errors.hasErrors()) {
-            return "user/login";
-        }*//*
-        // checking as existing user against DB value
-        session.setAttribute("signedUser", true);
-        // model.addAttribute("signedUser", session.getAttribute("signedUser"));
-        LOGGER.info("Inside signin post method........... Exits....");
-
-        return "redirect:/country";
-    }*/
-
     @RequestMapping(value = "/signup")
     public String signup(Model model) {
 
