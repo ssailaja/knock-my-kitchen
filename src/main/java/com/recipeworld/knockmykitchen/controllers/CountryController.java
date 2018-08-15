@@ -22,18 +22,23 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("country")
+@RequestMapping("/")
 public class CountryController {
 
     @Autowired
     private CountryService countryService;
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "country")
     public String index(Model model) {
         model.addAttribute("countries", countryService.findAll())
                 .addAttribute("title", "Recipe of the Week");
 
         return "country/index";
+    }
+
+    @RequestMapping(value = "/")
+    public String redirect(Model model) {
+        return "redirect:/country";
     }
 
 }
