@@ -30,9 +30,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
         user.setActive(1);
-        // user.setRoles(new HashSet<>(roleRepository.findAll()));
-        // UserDetailsServiceImpl.users.add(user);
-        // LOGGER.info("The saved user info.............{}", UserDetailsServiceImpl.users);
         userDao.save(user);
     }
 
@@ -40,7 +37,6 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         UserDetails details = userDetailsService.loadUserByUsername(username);
         return getUser(username);
-        // return new User(details.getUsername(), details.getPassword());
     }
 
     @Override

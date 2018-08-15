@@ -5,7 +5,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<main class="container-fluid">
+<main class="container-fluid" style="height:300px">
 
     <div class="row justify-content-center" sec:authorize="not isAuthenticated()">
         <form method="POST" style="max-width:600px;" th:object="${user}" th:action="@{/user/signup}" class="form-signin"  >

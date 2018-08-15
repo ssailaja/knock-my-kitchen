@@ -18,72 +18,60 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeDao recipeDao;
 
-    public static List<Recipe> recipes = new ArrayList<>();
-
-    public static Integer id = 0;
-
-    static {
-        Recipe recipe = new Recipe("Panneer Butter Masal", "Description", "Sailaja", new Date(), null, null);
-        recipe.setId(id++);
-        recipe.setCountry(CountryServiceImpl.countries.get(0));
-        recipes.add(recipe);
-        recipe = new Recipe("Briyani", "Chikkan Briyani", "Shreyas", new Date(), null, null);
-        recipe.setId(id++);
-        recipe.setCountry(CountryServiceImpl.countries.get(1));
-        recipes.add(recipe);
-        recipe = new Recipe("Fish Fry", "Fish Fry", "Sakthivel", new Date(), null, null);
-        recipe.setId(id++);
-        recipe.setCountry(CountryServiceImpl.countries.get(2));
-        recipes.add(recipe);
-        recipe = new Recipe("Laddu", "Sweet", "Sahasra", new Date(), null, null);
-        recipe.setId(id++);
-        recipe.setCountry(CountryServiceImpl.countries.get(3));
-        recipes.add(recipe);
-        recipe = new Recipe("Burger", "Western", "Steve", new Date(), null, null);
-        recipe.setId(id++);
-        recipe.setCountry(CountryServiceImpl.countries.get(3));
-        recipes.add(recipe);
-    }
-
+    /**
+     * Used to add new recipe...
+     * @param recipe
+     */
     @Override
     public void addRecipe(Recipe recipe) {
         recipeDao.save(recipe);
-        // recipes.add(recipe);
     }
 
+    /**
+     * Used to find available recipe by given id...
+     * @param recipeId
+     * @return Recipe
+     */
     @Override
-    public Recipe findById(Integer recipreId) {
-        return recipeDao.findById(recipreId).get();
-        // return recipes.stream().filter(re -> recipreId.equals(re.getId())).findAny().get();
+    public Recipe findById(Integer recipeId) {
+        return recipeDao.findById(recipeId).get();
     }
 
+    /**
+     *
+     * Used to delete existing recipe as per user request
+     * @param recipe
+     * @return booelan
+     */
     @Override
     public boolean removeRecipe(Recipe recipe) {
         recipeDao.delete(recipe);
-        // return recipes.remove(recipe);
         return true;
     }
 
     @Override
     public boolean modifyRecipe(Recipe recipe) {
         recipeDao.save(recipe);
-        // return recipes.add(recipe);
         return true;
     }
 
+    /**
+     * Used to get all avaialable recipes
+     * @return List<Recipe>
+     */
     @Override
     public List<Recipe> findAll() {
-        // return recipes;
         List<Recipe> target = new ArrayList<>();
         recipeDao.findAll().forEach(target::add);
         return target;
     }
 
+    /**
+     * Used to get all avaialable recipes by given country
+     * @return List<Recipe>
+     */
     @Override
     public List<Recipe> findAllByCountryId(Integer countryId) {
-        /*return recipes.stream().filter(re -> countryId.equals(re.getCountry().getId()))
-                .collect(Collectors.toList());*/
-
         return recipeDao.findRecipesByCountryId(countryId);
     }
 }

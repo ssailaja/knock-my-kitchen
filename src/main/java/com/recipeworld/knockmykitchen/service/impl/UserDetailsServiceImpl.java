@@ -20,25 +20,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
-    public static List<User> users = new ArrayList<>();
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserDao userDao;
 
-    static {
-        users.add(new User("shreyas", "1234"));
-        users.add(new User("sahasra", "5678"));
-    }
-
+    /**
+     * This method is also used by system to determine
+     * logged in user's existence based on role assigned to...
+     *
+     * Currently no role interface utilized here and
+     * have hardcoded only one role ("USER")...
+     *
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOGGER.info("Inside UserDetailsServiceImpl --------------- loadUserByUsername method.........." + username);
-        /*Optional<User> user = users.stream()
-                .filter(u -> u.getUserName().equals(username))
-                .findAny();*/
         User user = userDao.findByUserName(username);
         if (null == user) {
             throw new UsernameNotFoundException("User not found by name: " + username);

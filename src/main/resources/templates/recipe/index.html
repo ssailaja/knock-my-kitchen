@@ -31,7 +31,7 @@
             </li>
         </ul>
     </div>
-    <div class="row">
+    <!-- div class="row">
         <div class="form-group col-md-1">
             <select class="form-control pagination" id="pageSizeSelect">
                 <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
@@ -61,13 +61,16 @@
                 </li>
             </ul>
         </div>
+
+    </div-->
+
     <!-- TODO - Below div section would be displayed only on signed in users-->
     <div sec:authorize="isAuthenticated()" class="form-group">
 
         <a th:href="@{/recipe/add?countryId=} + ${countryId}" class="btn btn-lg btn-primary btn-block">Add Recipe</a>
 
     </div>
+    <div th:replace="fragments :: footer"></div>
 </div>
-<div th:replace="fragments :: footer"></div>
 </body>
 </html>

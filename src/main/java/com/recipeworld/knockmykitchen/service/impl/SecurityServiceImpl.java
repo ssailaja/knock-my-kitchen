@@ -11,6 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ * This is special service used by Spring boot framework
+ * in order assure to retain logger in user info until
+ * he/she logs out...
+ */
 @Service
 public class SecurityServiceImpl implements SecurityService {
     @Autowired
@@ -21,6 +27,11 @@ public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
+    /**
+     * System uses this to locate logged in user...
+     *
+     * @return String
+     */
     @Override
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
@@ -31,6 +42,14 @@ public class SecurityServiceImpl implements SecurityService {
         return null;
     }
 
+    /**
+     * System uses this to autologin while
+     * navigating to different pages in application
+     * until user seesion exists...
+     *
+     * @param username
+     * @param password
+     */
     @Override
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -3,6 +3,7 @@ package com.recipeworld.knockmykitchen.service.impl;
 import com.recipeworld.knockmykitchen.models.Country;
 import com.recipeworld.knockmykitchen.models.data.CountryDao;
 import com.recipeworld.knockmykitchen.service.CountryService;
+import com.recipeworld.knockmykitchen.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +16,22 @@ public class CountryServiceImpl implements CountryService {
     @Autowired
     private CountryDao countryDao;
 
-    public static List<Country> countries = new ArrayList<>();
-
-    public static Integer id = 0;
-
-    static {
-        Country country = new Country("India");
-        country.setId(id++);
-        countries.add(country);
-        country = new Country("America");
-        country.setId(id++);
-        countries.add(country);
-        country = new Country("Mexico");
-        country.setId(id++);
-        countries.add(country);
-        country = new Country("Australia");
-        country.setId(id++);
-        countries.add(country);
-    }
-
+    /**
+     * Used to retrieve all available countries...
+     * @return List<Country>
+     */
     @Override
     public List<Country> findAll() {
-        return countries;
+        return Utility.iterableToCollection(countryDao.findAll());
     }
 
+    /**
+     * Used to get single country info on given id...
+     * @param countryId
+     * @return Country
+     */
     @Override
     public Country findById(Integer countryId) {
-        return countries.stream().filter(cn -> countryId.equals(cn.getId())).findAny().get();
+        return countryDao.findById(countryId).get();
     }
 }
