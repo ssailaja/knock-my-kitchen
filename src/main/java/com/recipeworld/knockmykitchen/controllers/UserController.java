@@ -62,6 +62,10 @@ public class UserController {
                          Errors errors,
                          Model model) {
 
+        if(userService.isExists(newUser.getUserName())) {
+            errors.reject("error", "User already exists!");
+        }
+
         if (errors.hasErrors()) {
             LOGGER.info("Inside error on signup post method " + newUser.getUserName());
             return "/user/signup";

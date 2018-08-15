@@ -48,10 +48,10 @@
             </div>
         </form>
     </div>
-    <div class="row justify-content-center" sec:authorize="not isAuthenticated()">
+    <div class="row justify-content-center w3-center" sec:authorize="isAuthenticated()">
         <div class="form-group">
-            <p >
-                Session exists already, Please
+            <p class="errorContainer">
+                Session exists already, Please logout and sign up!
             </p>
         </div>
     </div>

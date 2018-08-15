@@ -87,3 +87,7 @@ input[type="password"] {
     font-style:italic;
     color:red;
 }
+
+.pagination-centered {
+	text-align: center;
+}

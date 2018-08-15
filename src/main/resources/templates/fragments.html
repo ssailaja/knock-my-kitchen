@@ -28,9 +28,9 @@
             <a class="w3-btn w3-center" th:href="@{/user/signup}"><span
                     class="w3-hide-small"> <b> Sign Up </b></span></a>
             <a class="w3-right w3-btn" th:href="@{/user/signin}" sec:authorize="not isAuthenticated()"><span
-                    class="w3-hide-small"> <b> Log In </b> </span></a>
+                    class="w3-hide-small"> <b> Sign In </b> </span></a>
             <a class="w3-right w3-btn" th:href="@{/user/logout}" sec:authorize="isAuthenticated()"><span
-                    class="w3-hide-small"><b>   Log Out </b></span></a>
+                    class="w3-hide-small"><b>   Sign Out </b></span></a>
         </div>
         <br/>
 

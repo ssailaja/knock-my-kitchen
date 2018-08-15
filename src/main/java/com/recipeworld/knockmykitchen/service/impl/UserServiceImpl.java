@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
+        user.setActive(1);
         // user.setRoles(new HashSet<>(roleRepository.findAll()));
         // UserDetailsServiceImpl.users.add(user);
         // LOGGER.info("The saved user info.............{}", UserDetailsServiceImpl.users);
@@ -46,6 +48,12 @@ public class UserServiceImpl implements UserService {
         // UserDetails details = getUserDetails(username);
         userDao.delete(getUser(username));
         // UserDetailsServiceImpl.users.remove(username);
+    }
+
+    @Override
+    public boolean isExists(String userName) {
+        User user = getUser(userName);
+        return null != user && user.getActive() == 1;
     }
 
     private User getUser(String username) {

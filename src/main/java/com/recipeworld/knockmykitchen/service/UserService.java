@@ -9,4 +9,6 @@ public interface UserService {
     User findByUsername(String username);
 
     void removeUser(String username);
+
+    boolean isExists(String userName);
 }
