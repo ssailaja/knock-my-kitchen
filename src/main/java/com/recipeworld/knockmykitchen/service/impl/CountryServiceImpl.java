@@ -3,7 +3,6 @@ package com.recipeworld.knockmykitchen.service.impl;
 import com.recipeworld.knockmykitchen.models.Country;
 import com.recipeworld.knockmykitchen.models.data.CountryDao;
 import com.recipeworld.knockmykitchen.service.CountryService;
-import com.recipeworld.knockmykitchen.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +20,8 @@ public class CountryServiceImpl implements CountryService {
      * @return List<Country>
      */
     @Override
-    public List<Country> findAll() {
-        return Utility.iterableToCollection(countryDao.findAll());
+    public Iterable<Country> findAll() {
+        return countryDao.findAll();
     }
 
     /**

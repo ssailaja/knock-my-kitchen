@@ -4,21 +4,28 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body class="container"> <!--th:background="@{/images/strawberry-juice-cocktail-glass.jpg}"-->
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <div>
-    <img src="https://www.freewebheaders.com/wordpress/wp-content/gallery/drinks/strawberry-juice-cocktail-glass-and-dessert-website-header.jpg" height="400" width="800">
+    <img th:src="@{/images/strawberry-juice-cocktail-glass.jpg}" height="300" width="100%">
     <label>Low-calorie chicken dishes</label>
 </div>
 <h1>Food Around The World</h1>
-<ul id="horizontal-list">
-    <li th:each="country : ${countries}" class="countryContainer">
+ <ul class="list-inline">
+    <li th:each="country : ${countries}" class="countryContainer" style="padding : 10px">
+
+
         <a th:href="@{/recipe/} + ${country.id}">
+            <img th:if="*{country.image != null}" th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(country.image)}}" height="50px" width="50px"/>
+            <!--<img src="${country.image}"/>-->
+            &emsp;
             <label th:text="${country.name}"></label>
         </a>
+
     </li>
+
 </ul>
 <div th:replace="fragments :: footer"></div>
 

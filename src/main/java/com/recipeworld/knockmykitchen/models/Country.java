@@ -20,6 +20,9 @@ public class Country {
     @JoinColumn(name = "country_id")
     private List<Recipe> recipes = new ArrayList<>();
 
+    @Lob
+    private byte[] image;
+
     public Country() {
     }
 
@@ -50,6 +53,14 @@ public class Country {
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

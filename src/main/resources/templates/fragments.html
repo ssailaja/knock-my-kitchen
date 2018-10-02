@@ -22,6 +22,9 @@
 
         <br/>
         <h1 class="w3-clear w3-center nextprev">Knock My Kitchen</h1>
+        <!--<div class="w3-clear w3-center nextprev">
+            <img th:src="@{/images/Knock-my-Kitchen.png}" height="150" width="50%">
+        </div>-->
         <br/>
         <div class="w3-clear w3-center nextprev">
             <a class="w3-left w3-btn" th:href="@{/country}"><span class="w3-hide-small"> <b>Home </b></span></a>
@@ -42,6 +45,11 @@
 
 </main>
 <div th:fragment="footer" class="w3-center">
+    <section id="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">var disqus_shortname="crederablog";var disqus_identifier="crederablog-19179";</script>	</section>
+    <script type='text/javascript' src='https://crederablog.disqus.com/embed.js?ver=4.9.2'></script>
+
     &copy;
     <span th:text="${#dates.year(#dates.createNow())}"></span>
 

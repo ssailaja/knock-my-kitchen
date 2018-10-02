@@ -18,7 +18,7 @@ public class PasswordMatchesValidator  implements ConstraintValidator<PasswordMa
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
         User user = (User) obj;
-        boolean matched = user.getPassword().equals(user.getConfirmPassword());
+        boolean matched = user.getPassword().equalsIgnoreCase(user.getConfirmPassword());
         LOGGER.info("Are passwords matched? ------ {}", matched);
         return matched;
     }

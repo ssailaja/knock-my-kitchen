@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CountryService {
 
-    List<Country> findAll();
+    Iterable<Country> findAll();
 
     Country findById(Integer countryId);
 }

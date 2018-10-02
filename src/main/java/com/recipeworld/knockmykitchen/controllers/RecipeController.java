@@ -63,7 +63,6 @@ public class RecipeController {
             return "recipe/add";
         }
 
-        newRecipe.setId(RecipeServiceImpl.id++);
         newRecipe.setCreatedBy(user.getName());
         newRecipe.setCreatedOn(newRecipe.dateConversion(new Date()));
         newRecipe.setCountry(countryService.findById(Integer.valueOf(countryId)));
